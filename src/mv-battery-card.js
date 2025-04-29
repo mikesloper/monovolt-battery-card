@@ -22,7 +22,7 @@ class MvBatteryCard extends LitElement {
     }
 
     render() {
-
+        
 
         const entityId = this.config.entity;
         const state = this.hass.states[entityId];
@@ -190,12 +190,27 @@ class MvBatteryCard extends LitElement {
 customElements.define("mv-battery-card", MvBatteryCard);
 
 
+window.customCards = window.customCards || [];
+window.customCards.push({
+  type: "mv-battery-card",
+  name: "Battery Card",
+  description: "A cool custom card",
+});
+
 export class MvBatteryCardEditor extends LitElement {
 
+    
 
+    static get properties() {
+        return {
+          hass: {},
+          _config: {},
+        };
+    }
+    
     setConfig(config) {
       this._config = config;
-
+      
       //this.loadCardHelpers();
     }
   
@@ -212,6 +227,9 @@ export class MvBatteryCardEditor extends LitElement {
     
     render() {
 
+        if (!this.hass || !this._config) {
+            return html``;
+        }
 
         const schema =  [
             { 
@@ -220,15 +238,7 @@ export class MvBatteryCardEditor extends LitElement {
                     text: {}
                 },
             },
-            {
-                name: "icon",
-                selector: {
-                  icon: {},
-                },
-                context: {
-                  icon_entity: "entity",
-                },
-            },
+
             {
               name: "entity",
               required: true,
@@ -255,12 +265,3 @@ export class MvBatteryCardEditor extends LitElement {
   }
   
   customElements.define("mv-battery-card-editor", MvBatteryCardEditor);
-  window.customCards = window.customCards || [];
-  window.customCards.push({
-    type: "mv-battery-card",
-    name: "Battery Card",
-    preview: false, // Optional - defaults to false
-    description: "A custom card made by me!", // Optional
-    documentationURL:
-      "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card", // Adds a help link in the frontend card editor
-  });

@@ -26,7 +26,7 @@ class MvTankLevelCard extends LitElement {
         const minR = this.config.min;
 
 
-        const percent = 1 - (state.state / (maxR - minR));
+        const percent = 1 - ((state.state - minR) / (maxR - minR));
         const percentStr = Math.round(percent * 100);
         const acidHeight = Math.round(percent * maxHeight);
 
@@ -144,7 +144,8 @@ class MvTankLevelCard extends LitElement {
             .acid-container {
                 overflow: hidden;
                 height: calc(100% - 8px);
-                border-radius: 18px;
+                border-bottom-right-radius: 18px;
+                border-bottom-left-radius: 18px;
                 margin: 4px;
             
                 .acid {
@@ -190,6 +191,13 @@ customElements.define("mv-tank-level-card", MvTankLevelCard);
 export class MvTankLevelCardEditor extends LitElement {
 
 
+    static get properties() {
+        return {
+          hass: {},
+          _config: {},
+        };
+    }
+
     setConfig(config) {
       this._config = config;
 
@@ -207,6 +215,10 @@ export class MvTankLevelCardEditor extends LitElement {
     }
     
     render() {
+
+        if (!this.hass || !this._config) {
+            return html``;
+        }
 
         const schema =  [
             { 

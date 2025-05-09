@@ -4,9 +4,9 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 
 export default {
-    input: 'src/mv-tank-level-card.js',
+    input: 'src/mv-tilt-card.js',
     output: {
-      file: 'build/mv-tank-level-card.min.js',
+      file: 'build/mv-tilt-card.min.js',
       format: 'iife',
     },
     plugins: [

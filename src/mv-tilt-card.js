@@ -29,20 +29,20 @@ class MvTiltCard extends LitElement {
         const measuredXAngle = this.hass.states[entityX].state;
 
 
-        var xAngle = measuredXAngle;
+        var xAngle = parseFloat(measuredXAngle);
         
         if(this.config.roll_compensation) {
-            xAngle = measuredXAngle - this.config.roll_compensation;
+            xAngle = parseFloat(measuredXAngle) + parseFloat(this.config.roll_compensation);
         }
         //const xAngleStr = xAngle ? xAngle.state : 'unavailable';
         const xAngleStr = Math.round(xAngle * 10)/ 10;
 
         const entityY = this.config.pitch;
         const measuredYAngle = this.hass.states[entityY].state;
-        var yAngle = measuredYAngle;
+        var yAngle = parseFloat(measuredYAngle);
 
         if(this.config.pitch_compensation) {
-            yAngle = measuredYAngle - this.config.pitch_compensation;
+            yAngle = parseFloat(measuredYAngle) + parseFloat(this.config.pitch_compensation);
         }
 
         //const yAngleStr = yAngle ? yAngle.state : 'unavailable';
@@ -75,9 +75,6 @@ class MvTiltCard extends LitElement {
 
     setConfig(config) {
 
-        if (!config.name) {
-            throw new Error("You need to define a Name");
-        }
         if (!config.roll) {
         throw new Error('You need to define a roll entity');
         }

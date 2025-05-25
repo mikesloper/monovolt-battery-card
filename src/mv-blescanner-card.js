@@ -14,6 +14,7 @@ function loadCSS(url) {
 
 
 const bleDevices = {};
+var maxTimestamp = 0;
 
 class MvBlescannerCard extends LitElement {
     
@@ -30,17 +31,26 @@ class MvBlescannerCard extends LitElement {
         const entity = this.config.ble_device;
         const deviceJson = this.hass.states[entity].state.toString();
 
+
+        //console.log(deviceJson); 
+
+        if(deviceJson == 'unknown' || deviceJson == '' ) return html``;
         const obj = JSON.parse(deviceJson);
 
-
         bleDevices[obj.address] = obj
-        //console.log(bleDevices);
 
         const itemTemplates = [];
         for (let i in bleDevices) {
-
+            
             itemTemplates.push(html`<li>${bleDevices[i].address} ( ${bleDevices[i].name} )</li>`);
-            //text += "<li>" + bleDevices[i].address + " (" + bleDevices[i].name + ")</li>";
+
+            if(bleDevices[i].timestamp < maxTimestamp - 120) {
+                delete bleDevices[i];
+                break;
+            }
+
+            if (bleDevices[i].timestamp > maxTimestamp ) maxTimestamp = bleDevices[i].timestamp;
+            
         }
     
         return html`

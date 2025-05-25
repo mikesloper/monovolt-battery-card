@@ -28,25 +28,28 @@ class MvTiltCard extends LitElement {
         const entityX = this.config.roll;
         const measuredXAngle = this.hass.states[entityX].state;
 
-
+        //roll
         var xAngle = parseFloat(measuredXAngle);
         
         if(this.config.roll_compensation) {
             xAngle = parseFloat(measuredXAngle) + parseFloat(this.config.roll_compensation);
         }
         //const xAngleStr = xAngle ? xAngle.state : 'unavailable';
-        const xAngleStr = Math.round(xAngle * 10)/ 10;
+        const xAngleStr = Math.round(xAngle * 10)/ 10 *-1;
 
         const entityY = this.config.pitch;
+        
         const measuredYAngle = this.hass.states[entityY].state;
         var yAngle = parseFloat(measuredYAngle);
 
+
+        //pitch
         if(this.config.pitch_compensation) {
             yAngle = parseFloat(measuredYAngle) + parseFloat(this.config.pitch_compensation);
         }
 
         //const yAngleStr = yAngle ? yAngle.state : 'unavailable';
-        const yAngleStr = Math.round(yAngle * 10)/10 
+        const yAngleStr = Math.round(yAngle * 10)/10 *-1 
 
         const xRotate = (parseFloat(xAngleStr) * 3).toString();
         const yRotate = (parseFloat(yAngleStr) * 3).toString();

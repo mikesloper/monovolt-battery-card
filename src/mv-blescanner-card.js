@@ -4,19 +4,12 @@ import {
     css,
 } from "lit";
 
-function loadCSS(url) {
-    const link = document.createElement("link");
-    link.type = "text/css";
-    link.rel = "stylesheet";
-    link.href = url;
-    document.head.appendChild(link);
-}
 
 
 const bleDevices = {};
 var maxTimestamp = 0;
 
-class MvBlescannerCard extends LitElement {
+export class MvBlescannerCard extends LitElement {
     
     static get properties() {
         return {
@@ -34,7 +27,13 @@ class MvBlescannerCard extends LitElement {
 
         //console.log(deviceJson); 
 
-        if(deviceJson == 'unknown' || deviceJson == '' ) return html``;
+        if(deviceJson == 'unknown' || deviceJson == '' ) return html`
+            <ha-card header="${this.config.name}">
+                <div class="card-content">
+                    <div>...</div>
+                </div>
+            </ha-card>
+        `;
         const obj = JSON.parse(deviceJson);
 
         bleDevices[obj.address] = obj

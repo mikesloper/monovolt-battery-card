@@ -4,9 +4,9 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 
 export default {
-    input: 'src/mv-tilt-card.js',
+    input: 'src/monoty.js',
     output: {
-      file: 'build/mv-tilt-card.min.js',
+      file: 'monoty.js',
       format: 'iife',
     },
     plugins: [

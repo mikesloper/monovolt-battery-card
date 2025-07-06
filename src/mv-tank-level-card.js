@@ -5,7 +5,7 @@ import {
 } from "lit";
 
 
-class MvTankLevelCard extends LitElement {
+export class MvTankLevelCard extends LitElement {
     static get properties() {
         return {
             hass: {},

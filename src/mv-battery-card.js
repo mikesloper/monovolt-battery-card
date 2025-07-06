@@ -4,16 +4,9 @@ import {
     css,
 } from "lit";
 
-function loadCSS(url) {
-    const link = document.createElement("link");
-    link.type = "text/css";
-    link.rel = "stylesheet";
-    link.href = url;
-    document.head.appendChild(link);
-}
 
 
-class MvBatteryCard extends LitElement {
+export class MvBatteryCard extends LitElement {
     static get properties() {
         return {
             hass: {},

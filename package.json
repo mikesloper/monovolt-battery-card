@@ -9,7 +9,10 @@
     "build": "npx rollup -c"
   },
   "dependencies": {
-    "lit": "^2.0.0-rc.2"
+    "lit": "^2.0.0-rc.2",
+    "rollup-plugin-combine": "^2.1.1",
+    "rollup-plugin-empty": "^1.0.0",
+    "rollup-plugin-match": "^1.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",

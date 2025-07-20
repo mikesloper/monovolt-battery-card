@@ -19,7 +19,7 @@ export class MvBatteryCard extends LitElement {
 
         const entityId = this.config.entity;
         const state = this.hass.states[entityId];
-        const stateStr = state ? state.state : "unavailable";
+        const stateStr = state ? Math.round(state.state * 10)/10 : "unavailable";
 
         const acidHeight = state ? Math.round(state.state * 200 / 100) : 0;
 
